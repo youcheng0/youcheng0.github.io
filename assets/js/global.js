@@ -1,9 +1,3 @@
-/**
- * @usage global script
- * @author chmyun
- * @date: 2014-12-28
- */
-
 // duoshuo comment
 loadScript((document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js');
 
@@ -151,7 +145,7 @@ function backtotop(id) {
 
 // fork me
 function forkMe() {
-	$('body').append('<a href="https://github.com/hcy2367" title="Fork me on GitHub" target="_blank" style="position:fixed;top:0;right:0;z-index:999;"><img src="/assets/images/forkme.png" alt="Fork me on GitHub"></a>');
+	$('body').append('<a href="https://github.com/youcheng0" title="Fork me on GitHub" target="_blank" style="position:fixed;top:0;right:0;z-index:999;"><img src="/assets/images/forkme.png" alt="Fork me on GitHub"></a>');
 }
 
 // console.log
@@ -161,16 +155,16 @@ function forkMe() {
 		},
 		n = '\n' ,
 		words = [
-			n +'            ┏┓．°． ┏┓            【恭喜您！得到节操：50克 ！】     '+ n
+			n +'            ┏┓．°． ┏┓            【神马护佑】     '+ n
 				+'            ┃┗━━━┛┃'+ n
 				+'            ┃ ⌒   ⌒ ┃'+ n
-				+'            ┃  ●   ●  ┃                   少年不知愁滋味'+ n
-				+'            ┃  ” ω ”  ┃               By chmyun QQ：729555742'+ n
+				+'            ┃  ●   ●  ┃ '+ n
+				+'            ┃  ” ω ”  ┃               By youcheng1 youcheng1@126.com'+ n
 				+'            ┗○━━━━○┛'+ n
 			,
 			n +'   ┏┓       ┏┓'+ n
 				+' ┏┛┻━━━━┛┻┓'+ n
-				+' ┃              ┃                              【神兽在此守护】'+ n
+				+' ┃              ┃                              【神马护佑】'+ n
 				+' ┃      ━      ┃'+ n
 				+' ┃  ┳┛  ┗┳   ┃'+ n
 				+' ┃              ┃'+ n
@@ -180,10 +174,10 @@ function forkMe() {
 				+'      ┃   ┃'+ n
 				+'      ┃   ┃'+ n
 				+'      ┃   ┗━━━━-━┓'+ n
-				+'      ┃              ┣┓                   少年不知愁滋味'+ n
+				+'      ┃              ┣┓'+ n
 				+'      ┃              ┏┛'+ n
 				+'      ┗┓┓┏━┳┓┏━┛'+ n
-				+'        ┃┫┫  ┃┫┫                      By chmyun hcy2367@163.com'+ n
+				+'        ┃┫┫  ┃┫┫                      By youcheng1 youcheng1@126.com'+ n
 				+'        ┗┻┛  ┗┻┛'
 		];
 	console.log(words[rand(0, words.length - 1 )]);
