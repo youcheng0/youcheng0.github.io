@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <title>陈囿诚-喜欢的书，觉得牛叉的书</title>
+    <style>
+        body {
+            background-color: #000000;
+            margin: 0;
+            font-family: Arial;
+            overflow: hidden;
+        }
+        a {
+            color: #ffffff;
+        }
+        #info {
+            position: absolute;
+            width: 100%;
+            color: #ffffff;
+            padding: 5px;
+            font-family: Monospace;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            z-index: 1;
+        }
+        #menu {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .element {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            box-shadow: 0px 0px 20px rgba(0,255,255,0.5);
+            border: 1px solid rgba(127,255,255,0.25);
+            cursor: default;
+        }
+        .element:hover {
+            box-shadow: 0px 0px 20px rgba(0,255,255,0.75);
+            border: 1px solid rgba(127,255,255,0.75);
+        }
+        .element .number {
+            /*					position: absolute;
+                                top: 20px;
+                                right: 20px;
+                                font-size: 20px;
+                                color: rgba(127,255,255,0.75);*/
+            display: none;
+        }
+        .element .symbol {
+            position: absolute;
+            top: 120px;
+            width: 100%;
+            font-size: 70px;
+            text-align: center;
+            color: rgba(255,255,255,0.75);
+            font-weight: bold;
+            -webkit-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+            -moz-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+            -o-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+            -ms-filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+            filter: drop-shadow(0px 0px 20px rgba(0,255,255,0.95));
+        }
+        .element .details {
+            position: absolute;
+            top: 225px;
+            width: 100%;
+            font-size: 18px;
+            text-align: center;
+            color: rgba(127,255,255,0.75);
+        }
+        button {
+            color: rgba(127,255,255,0.75);
+            background: transparent;
+            outline: 1px solid rgba(127,255,255,0.75);
+            border: 0px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: rgba(0,255,255,0.5);
+        }
+        button:active {
+            color: #000000;
+            background-color: rgba(0,255,255,0.75);
+        }
+        .elementIn1{
+            display: none;
+        }
+        .pic{
+            border: 1px solid rgba(127, 255, 255, 0.25);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            cursor: default;
+            height: 350px;
+            width: 350px;
+        }
+    </style>
+</head>
+<body>
+<script src="libs/three.js"></script>
+<script src="libs/tween.js"></script>
+<script src="libs/TrackballControls.js"></script>
+<script src="libs/CSS3DRenderer.js"></script>
+
+<div id="container"></div>
+<div id="info">陈囿诚-喜欢的书，觉得牛叉的书</div>
+<script>
+    var table = [
+        [ "工作积极", "", "http://images.china-pub.com/ebook3020001-3025000/3021144/zcover.jpg", 1, 1 ],
+        [ "乐于学习", "", "http://images.china-pub.com/ebook4720001-4725000/4720077/zcover.jpg", 1, 3],
+        [ "具有创意", "", "http://images.china-pub.com/ebook25001-30000/25961/zcover.jpg", 1, 2 ],
+        [ "陈囿诚", "youcheng1@126.com<br>13824128839", "http://all1.top/youcheng1/img/feat-4.jpg", 2, 2 ],
+        [ "善于分析", "", "http://images.china-pub.com/ebook3770001-3775000/3770403/zcover.jpg", 2, 3],
+        [ "善于收集", "", "http://images.china-pub.com/ebook25001-30000/29811/zcover.jpg", 2, 1 ],
+        [ "分工合作", "", "http://images.china-pub.com/ebook25001-30000/29706/zcover.jpg", 3, 1 ],
+        [ "乐于交流", "", "http://images.china-pub.com/ebook30001-35000/31281/zcover.jpg", 3, 3],
+        [ "工作负责", "", "http://images.china-pub.com/ebook195001-200000/198060/zcover.jpg", 3, 2 ],
+        [ "HTML", "", "http://it-ebooks.info/images/ebooks/3/learning_web_design_4th_edition.jpg", 0, 0 ],
+        [ "WORD", "", "http://image2.suning.cn/b2c/catentries/000000000125466455_1_200x200.jpg", 0, 1 ],
+        [ "PPT", "", "http://images.china-pub.com/ebook195001-200000/198838/zcover.jpg", 0, 2 ],
+        [ "EXCET", "", "http://images.china-pub.com/ebook4730001-4735000/4731328/zcover.jpg", 0, 3 ],
+        [ "Photoshop", "", "http://images.china-pub.com/ebook4940001-4945000/4942054/zcover.jpg", 0, 4 ],
+        [ "Bootstrap", "", "http://images.china-pub.com/ebook3770001-3775000/3771063/zcover.jpg", 4, 0 ],
+        [ "Php", "", "http://images.china-pub.com/ebook3020001-3025000/3020527/zcover.jpg", 4, 1 ],
+        [ "MySQL", "", "http://images.china-pub.com/ebook3800001-3805000/3800216/zcover.jpg", 4, 2 ],
+        [ "Mongodb", "", "http://images.china-pub.com/ebook3680001-3685000/3684431/zcover.jpg", 4, 3 ],
+        [ "Project", "", "http://images.china-pub.com/ebook195001-200000/197026/zcover.jpg", 4, 4 ],
+        [ "CSS", "", "http://images.china-pub.com/ebook4940001-4945000/4942111/zcover.jpg", 1, 0 ],
+        [ "MEAN", "", "http://images.china-pub.com/ebook4725001-4730000/4727674/zcover.jpg", 1, 4 ],
+        [ "JavaScript", "", "http://www.oreilly.com.cn/images/bookcover/javascript_tdg_5e_cvr_s.jpg", 2, 0 ],
+        [ "SSH", "", "http://images.china-pub.com/ebook195001-200000/197877/zcover.jpg", 2, 4 ],
+        [ "Hadoop", "", "http://images.china-pub.com/ebook3765001-3770000/3769029/zcover.jpg", 3, 4 ],
+        [ "JQuery", "", "http://images.china-pub.com/ebook195001-200000/199161/zcover.jpg", 3, 0 ],
+    ];
+    var camera, scene, renderer;
+    var controls;
+    var objects = [];
+    var targets = { table: []};
+    init();
+    animate();
+    function init() {
+        camera = new THREE.PerspectiveCamera( 85, window.innerWidth / window.innerHeight, 1, 40000 );
+        camera.position.z = 1000;
+        scene = new THREE.Scene();
+        for ( var i = 0; i < table.length; i ++ ) {
+            var item = table[ i ];
+            var element = document.createElement( 'div' );
+            element.className = 'element';
+            element.style.backgroundColor = 'rgba(0,127,127,' + ( Math.random() * 0.5 + 0.25 ) + ')';
+            var elementIn1 = document.createElement( 'div' );
+            elementIn1.className = 'elementIn1';
+            element.appendChild( elementIn1 );
+            var elementIn2 = document.createElement( 'div' );
+            elementIn2.className = 'elementIn2';
+            if(item[ 2 ]){
+                elementIn2.innerHTML = '<img src="'+item[ 2 ]+'" class="pic" alt="'+item[0]+'">';}else {
+                elementIn2.innerHTML = '<div class="symbol">'+(i+1)+'</div>';
+            }
+            element.appendChild( elementIn2 );
+            var number = document.createElement( 'div' );
+            number.className = 'number';
+            number.textContent = i + 1;
+            elementIn1.appendChild( number );
+            var symbol = document.createElement( 'div' );
+            symbol.className = 'symbol';
+            symbol.textContent = item[ 0 ];
+            elementIn1.appendChild( symbol );
+            var details = document.createElement( 'div' );
+            details.className = 'details';
+            details.innerHTML = item[ 1 ] ;
+            elementIn1.appendChild( details );
+            var object = new THREE.CSS3DObject( element );
+            object.position.x = Math.random() * 4000 - 3000;
+            object.position.y = Math.random() * 4000 - 3000;
+            object.position.z = Math.random() * 4000 - 2000;
+            scene.add( object );
+            objects.push( object );
+        }
+        // table
+        for ( var i = 0; i < objects.length; i ++ ) {
+            var item = table[ i ];
+            var object = new THREE.Object3D();
+            object.position.x = ( item[ 3 ] * 360 ) - 740;
+            object.position.y = - ( item[ 4 ] * 400 ) + 800;
+            targets.table.push( object );
+        }
+        renderer = new THREE.CSS3DRenderer();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.domElement.style.position = 'absolute';
+        document.getElementById( 'container' ).appendChild( renderer.domElement );
+        //
+        controls = new THREE.TrackballControls( camera, renderer.domElement );
+        controls.rotateSpeed = 0.5;
+        controls.addEventListener( 'change', render );
+        transform( targets.table, 5000 );
+        window.addEventListener( 'resize', onWindowResize, false );
+    }
+    function transform( targets, duration ) {
+        TWEEN.removeAll();
+        for ( var i = 0; i < objects.length; i ++ ) {
+            var object = objects[ i ];
+            var target = targets[ i ];
+            new TWEEN.Tween( object.position )
+                    .to( { x: target.position.x, y: target.position.y, z: target.position.z }, Math.random() * duration + duration )
+                    .easing( TWEEN.Easing.Exponential.InOut )
+                    .start();
+            new TWEEN.Tween( object.rotation )
+                    .to( { x: target.rotation.x, y: target.rotation.y, z: target.rotation.z }, Math.random() * duration + duration )
+                    .easing( TWEEN.Easing.Exponential.InOut )
+                    .start();
+        }
+        new TWEEN.Tween( this )
+                .to( {}, duration * 2 )
+                .onUpdate( render )
+                .start();
+    }
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+    function animate() {
+        requestAnimationFrame( animate );
+        TWEEN.update();
+        controls.update();
+    }
+    function render() {
+        renderer.render( scene, camera );
+    }
+</script>
+<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    $('.elementIn2').hover(function(){$(this).hide();$(this).parent().children('.elementIn1').show();},function(){$(this).show();$(this).parent().children('.elementIn1').hide();});
+    $('.elementIn2').on('click',function(){$(this).hide();$(this).parent().children('.elementIn1').show();});
+</script>
+</body>
+</html>
